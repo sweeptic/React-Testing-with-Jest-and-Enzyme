@@ -1,3 +1,5 @@
+<h1>React Testing with Jest and Enzyme</h1>
+
 What you'll learn
 Write unit and integration tests for React and Redux using Jest and Enzyme.
 Know the tradeoffs for different testing approaches and when to choose which approach.
