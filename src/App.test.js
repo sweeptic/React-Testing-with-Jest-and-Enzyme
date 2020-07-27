@@ -7,14 +7,14 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-
-
-
 test('renders without error', () => {
-  // const div = document.createElement('div');
-  render(<App />);
-  // ReactDOM.unmountComponentAtNode(div);
-  // const linkElement = getByText(/learn react/i);
-  // expect(linkElement).toBeInTheDocument();
-  // throw new Error;
+
+  const wrapper = shallow(<App />);
+  console.log(wrapper.debug());
+
+  //tbt
+  expect(wrapper).toBeTruthy();
+
+  //tbf
+  // expect(wrapper).toBeFalsy();
 });
