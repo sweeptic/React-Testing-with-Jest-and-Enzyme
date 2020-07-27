@@ -17,14 +17,17 @@ export default class App extends Component {
 
   render() {
     return (
-      <div data-test="component-app">
+      <div
+        data-test="component-app">
         <h1
+          data-test="counter-display"
           style={{
             textAlign: "center",
             fontSize: '43px'
           }}>The count is {this.state.counter}</h1>
 
         <button
+          data-test="increment-button"
           onClick={this.onChangeHandler}
           style={{
             display: 'block',
