@@ -7,7 +7,9 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 test('renders without error ', () => {
-
+  const wrapper = shallow(<App />);
+  const appComponent = wrapper.find("[data-test='component-app']");
+  expect(appComponent.length).toBe(1);
 })
 
 
