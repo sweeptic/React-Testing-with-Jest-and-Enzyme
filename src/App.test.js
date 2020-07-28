@@ -36,10 +36,15 @@ test('renders without error ', () => {
   expect(appComponent.length).toBe(1);
 })
 
-
 test('renders increment button ', () => {
   const wrapper = setup();
   const button = findByTestAttr(wrapper, 'increment-button');
+  expect(button.length).toBe(1);
+})
+
+test('renders decrement button', () => {
+  const wrapper = setup();
+  const button = findByTestAttr(wrapper, 'decrement-button');
   expect(button.length).toBe(1);
 })
 
@@ -64,6 +69,43 @@ test('clicking button increments counter display', () => {
   button.simulate('click');
   const counterDisplay = findByTestAttr(wrapper, 'counter-display');
   expect(counterDisplay.text()).toContain(counter + 1);
+})
+
+test('clicking button decrements counter display', () => {
+  const counter = 7;
+  const wrapper = setup(null, { counter });
+  const button = findByTestAttr(wrapper, 'decrement-button');
+  button.simulate('click');
+  const counterDisplay = findByTestAttr(wrapper, 'counter-display');
+  expect(counterDisplay.text()).toContain(counter - 1);
+})
+
+test('clicking button decrements doesnt go below 0', () => {
+  const counter = 0;
+  const wrapper = setup(null, { counter });
+  const button = findByTestAttr(wrapper, 'decrement-button');
+  button.simulate('click');
+  const counterDisplay = findByTestAttr(wrapper, 'counter-display');
+  expect(counterDisplay.text()).toContain(counter);
+})
+
+test('show warning message when below 0', () => {
+  const counter = 0;
+  const wrapper = setup(null, { counter });
+  const button = findByTestAttr(wrapper, 'decrement-button');
+  button.simulate('click');
+  const counterDisplay = findByTestAttr(wrapper, 'warning-text');
+  expect(counterDisplay.text()).toBe('The counter cannot go below 0')
+})
+
+test('hide show warning message when increment from 0 to 1', () => {
+  const counter = 0;
+  const errorMessage = "The counter cannot go below 0";
+  const wrapper = setup(null, { counter, errorMessage });
+  const button = findByTestAttr(wrapper, 'increment-button');
+  button.simulate('click');
+  const counterDisplay = findByTestAttr(wrapper, 'warning-text');
+  expect(counterDisplay.text()).toBe("")
 })
 
 

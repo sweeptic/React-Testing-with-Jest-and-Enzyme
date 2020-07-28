@@ -6,17 +6,35 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      counter: 0
+      counter: 0,
+      errorMessage: ''
     };
   }
 
-  onChangeHandler = () => {
+  onChangeHandler_incr = () => {
     this.setState((prevState, props) => {
       return {
-        counter: prevState.counter + 1
+        counter: prevState.counter + 1,
+        errorMessage: ''
       };
     })
   }
+
+
+  onChangeHandler_decr = () => {
+    if (this.state.counter !== 0) {
+      this.setState((prevState, props) => {
+        return {
+          counter: prevState.counter - 1
+        };
+      })
+    } else {
+      this.setState({
+        errorMessage: 'The counter cannot go below 0'
+      })
+    }
+  }
+
 
 
   render() {
@@ -29,15 +47,29 @@ export default class App extends Component {
             textAlign: "center",
             fontSize: '43px'
           }}>The count is {this.state.counter}</h1>
+        <br />
+        <h1 data-test="warning-text" style={{ textAlign: "center", color: 'red' }}>{this.state.errorMessage}</h1>
 
         <button
           data-test="increment-button"
-          onClick={this.onChangeHandler}
+          onClick={this.onChangeHandler_incr}
           style={{
             display: 'block',
             margin: '0 auto',
             fontSize: '25px'
           }} >Increment Counter</button>
+        <br />
+
+        <button
+          data-test="decrement-button"
+          onClick={this.onChangeHandler_decr}
+          style={{
+            display: 'block',
+            margin: '0 auto',
+            fontSize: '25px'
+          }} >Decrement Counter</button>
+
+
       </div>
     )
   }
